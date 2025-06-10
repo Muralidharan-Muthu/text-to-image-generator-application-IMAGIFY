@@ -4,6 +4,7 @@ import { assets } from '../assets/assets'
 import Steps from '../components/Steps'
 import Description from '../components/Description'
 import Testimonials from '../components/Testimonials'
+import GenerateImg from '../components/GenerateImg'
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Steps />
       <Description />
       <Testimonials />
+      <GenerateImg />
     </div>
   )
 }
