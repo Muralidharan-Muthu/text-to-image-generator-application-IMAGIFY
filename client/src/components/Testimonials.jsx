@@ -2,10 +2,16 @@ import React from 'react'
 import Title from './Title'
 import { testimonialsData } from '../assets/assets'
 import Testimonial from './Testimonial'
+import { motion } from 'framer-motion'
 
 const Testimonials = () => {
     return (
-        <div className='flex flex-col items-center justify-center my-24 p-6 py-12'>
+        <motion.div
+            initial={{ opacity: 0.2, y: 100 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='flex flex-col items-center justify-center my-24 p-6 py-12'>
             <Title
                 title={"Customer testimonials"}
                 description={"What Our Users Are Saying"}
@@ -23,7 +29,7 @@ const Testimonials = () => {
                     />
                 )}
             </div>
-        </div>
+        </motion.div>
     )
 }
 

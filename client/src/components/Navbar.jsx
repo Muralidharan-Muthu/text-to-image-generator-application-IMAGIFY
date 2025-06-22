@@ -6,7 +6,7 @@ import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
 
-    const {user} = useContext(AppContext);
+    const {user, setShowLogin} = useContext(AppContext);
 
     const navigate = useNavigate()
 
@@ -25,8 +25,8 @@ const Navbar = () => {
                         <p className='text-gray-600 max-sm :hidden pl-4'>Hi, {user}</p>
                         <div className='relative group'>
                             <img src={assets.profile_icon} alt="profile-icon" className='w-10 drop-shadow' />
-                            <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-12 shadow-lg'>
-                                <ul className='list-none m-0 p-2 bg-white rounded-md border text-sm'>
+                            <div className='absolute hidden group-hover:block top-0 right-0 z-10 pt-12 text-gray-800 rounded'>
+                                <ul className='list-none m-0 p-2 bg-white rounded-md shadow-lg border border-blue-100 text-sm'>
                                     <li className='py-1 px-2 cursor-pointer pr-10'>Logout</li>
                                 </ul>
                             </div>
@@ -35,7 +35,7 @@ const Navbar = () => {
                 ) : (
                     <div className='flex items-center gap-2 sm:gap-5'>
                         <p onClick={() => navigate('/buycredit')} className='cursor-pointer'>Pricing</p>
-                        <button className='bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full'>Login</button>
+                        <button onClick={() => setShowLogin(true)} className='bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full'>Login</button>
                     </div>
                 )}
             </div>

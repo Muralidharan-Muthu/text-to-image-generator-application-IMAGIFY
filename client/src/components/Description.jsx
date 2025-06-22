@@ -1,14 +1,20 @@
 import React from 'react'
 import Title from './Title'
 import { assets } from '../assets/assets'
+import { motion } from 'framer-motion'
 
 const Description = () => {
     return (
-        <div className='flex flex-col items-center justify-center my-24 p-6 md:px-28'>
+        <motion.div
+            initial={{ opacity: 0.2, y: 100 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='flex flex-col items-center justify-center my-24 p-6 md:px-28'>
             <Title title={"Create AI Images"}
                 description={"Turn your imagination into visuals"}
             />
-            <div className='flex flex-col items-center gap-5 md:flex-row md:gap-14'>
+            <div className='flex flex-col items-center gap-5 xl:flex-row md:gap-14'>
                 <img src={assets.sample_img_1}
                     alt="sample-img"
                     className='w-80 xl:w-96 rounded-lg' />
@@ -18,7 +24,7 @@ const Description = () => {
                     <p className='text-gray-600'>Simply type in a text prompt, and our cutting-edge AI will generate high-quality images in seconds. From product visuals to character designs and portraits, even concepts that don’t yet exist can be visualized effortlessly. Powered by advanced AI technology, the creative possibilities are limitless!</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

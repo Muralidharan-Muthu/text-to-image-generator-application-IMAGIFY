@@ -1,11 +1,17 @@
 import React from 'react'
 import { stepsData } from '../assets/assets'
 import Title from './Title'
+import { motion } from 'framer-motion'
 
 const Steps = () => {
     return (
-        <div className='flex flex-col items-center justify-center my-32'>
-            <Title title={"How it works"} description={"Transform Words Into Stunning Images"}/>
+        <motion.div
+            initial={{ opacity: 0.2, y: 100 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='flex flex-col items-center justify-center my-32'>
+            <Title title={"How it works"} description={"Transform Words Into Stunning Images"} />
             <div className='space-y-4 w-full max-w-3xl text-sm'>
                 {stepsData.map((item, index) => (
                     <div key={index}
@@ -20,7 +26,7 @@ const Steps = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </motion.div>
     )
 }
 

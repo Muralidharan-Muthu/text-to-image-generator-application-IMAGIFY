@@ -5,7 +5,7 @@ const Testimonial = ({ key, image, name, role, stars, text }) => {
     return (
         <div
             key={key}
-            className='bg-white/20 p-12 rounded-lg shadow-md border border-gray-200 w-80 m-auto cursor-pointer hover:scale-[1.02] transition-all duration-300'>
+            className='bg-white/20 p-12 rounded-lg shadow-md border border-gray-400/60 w-80 m-auto cursor-pointer hover:scale-[1.02] transition-all duration-300'>
             <div className='flex flex-col items-center'>
                 <img
                     src={image}

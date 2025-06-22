@@ -4,11 +4,18 @@ import Result from './pages/Result';
 import BuyCredit from './pages/BuyCredit';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Login from './components/Login';
+import { useContext } from 'react';
+import { AppContext } from './context/AppContext';
 
 const App = () => {
+
+  const {showLogin} = useContext(AppContext)
+
   return (
-    <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-teal-100/60 to-orange-100/60'>
+    <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-teal-100/50 to-orange-100/50'>
       <Navbar />
+      {showLogin && <Login />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/result' element={<Result />} />
