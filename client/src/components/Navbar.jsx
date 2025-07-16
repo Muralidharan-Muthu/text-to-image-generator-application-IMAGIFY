@@ -22,7 +22,7 @@ const Navbar = () => {
                             <img src={assets.credit_star} alt="star-icon" className='w-5'/>
                             <p className='text-xs sm:text-sm font-medium text-gray-600'>Credit : 50 </p>
                         </button>
-                        <p className='text-gray-600 max-sm :hidden pl-4'>Hi, {user}</p>
+                        <p className='text-gray-600 max-sm:hidden pl-4'>Hi, {user.name}</p>
                         <div className='relative group'>
                             <img src={assets.profile_icon} alt="profile-icon" className='w-10 drop-shadow' />
                             <div className='absolute hidden group-hover:block top-0 right-0 z-10 pt-12 text-gray-800 rounded'>
@@ -40,8 +40,6 @@ const Navbar = () => {
                 )}
             </div>
         </div>
-
-
     )
 }
 

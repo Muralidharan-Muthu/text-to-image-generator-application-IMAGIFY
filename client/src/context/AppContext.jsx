@@ -5,11 +5,14 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
 
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState(null);
     const [showLogin, setShowLogin] = useState(false)
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+    const [ token , setToken ] = useState(localStorage.getItem('token'));
+    const [ credit, setCredit ] = useState(false);
 
     const value = {
-        user, setUser, showLogin, setShowLogin
+        user, setUser, showLogin, setShowLogin, backendUrl, token, setToken, credit, setCredit
     }
 
     return (

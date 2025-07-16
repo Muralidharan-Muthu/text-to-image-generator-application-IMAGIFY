@@ -5,6 +5,7 @@ import Steps from '../components/Steps'
 import Description from '../components/Description'
 import Testimonials from '../components/Testimonials'
 import GenerateImg from '../components/GenerateImg'
+import ModelSection from '../components/ModelSection'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Description />
       <Testimonials />
       <GenerateImg />
+      <ModelSection />
     </div>
   )
 }
