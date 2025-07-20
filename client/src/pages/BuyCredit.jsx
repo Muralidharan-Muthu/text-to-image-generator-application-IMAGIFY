@@ -1,10 +1,72 @@
 import React, { useContext } from 'react'
 import { assets, plans } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const BuyCredit = () => {
 
-    const { user } = useContext(AppContext)
+    const { user, backendUrl, loadCreditData, token, setShowLogin } = useContext(AppContext);
+
+    const navigate = useNavigate();
+
+    const initPay = async (order) => {
+        const options = {
+            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: 'Credits Payment',
+            description: 'Credits Payment',
+            order_id: order.id,
+            receipt: order.receipt,
+            handler: async (res) => {
+                try {
+                    const { data } = await axios.post(backendUrl + '/api/user/verify-razor',
+                        res,{
+                            headers:{token}
+                        }
+                    )
+                    if (data.success){
+                        loadCreditData();
+                        navigate('/');
+                        toast.success('Credits Added!');
+                    }
+                } catch (error) {
+                    toast.error(error.message);
+                }
+            }
+        }
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+    }
+
+    const paymentRazorpay = async (planId) => {
+        try {
+            if (!user) {
+                setShowLogin(true);
+                return;
+            }
+            const { data } = await axios.post(backendUrl + '/api/user/pay-razor',
+                {
+                    planId
+                }, {
+                headers: {
+                    token
+                }
+            }
+            )
+
+            if (data.success && data.order) {
+                initPay(data.order);
+            }
+            else {
+                toast.error(data.message || "Payment initiation failed");
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
 
     return (
         <div
@@ -22,7 +84,7 @@ const BuyCredit = () => {
                         <p className='text-sm'>{plan.desc}</p>
                         <p className='mt-6'>
                             <span className='text-3xl font-medium'>₹{plan.price}</span> / {plan.credits} credits</p>
-                        <button className='w-full mt-8 bg-gray-800 text-white text-sm rounded-md py-2.5 min-w-52'>{user ? "Purchase" : "Get Started"}</button>
+                        <button onClick={() => paymentRazorpay(plan.id)} className='w-full mt-8 bg-gray-800 text-white text-sm rounded-md py-2.5 min-w-52'>{user ? "Purchase" : "Get Started"}</button>
                     </div>
                 ))}
             </div>

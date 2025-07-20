@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { assets } from "../assets/assets";
 import { motion } from 'framer-motion'
+import { AppContext } from '../context/AppContext';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 const Result = () => {
 
@@ -8,9 +11,24 @@ const Result = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState("")
+  const { generateImage_ } = useContext(AppContext);
 
   const OnSubmitHandler = async (e) => {
-    // come back later when implementing backend
+    e.preventDefault();
+    setLoading(true);
+    if (input){
+      const image = await generateImage_(input);
+      if (image) {
+        setIsImageLoaded(true);
+        setImage(image);
+      }
+      setLoading(false);
+      setInput("");
+    }
+    else{
+      toast.error("Please enter a prompt to generate an image");
+      setLoading(false);
+    }
   }
 
   return (
@@ -43,7 +61,7 @@ const Result = () => {
           />
           <button type='submit'
             className='bg-zinc-900 px-10 sm:px-16 py-3 rounded-full'
-            onSubmit={OnSubmitHandler}
+            onClick={(e) => {OnSubmitHandler(e)}}
           >
             Generate
           </button>
